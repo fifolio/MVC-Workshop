@@ -20,14 +20,22 @@ mongoose
   );
 
 // Create New Mongoose Schema {Record structure contains the default key and value type}
-const schema = new mongoose.Schema({ title: String });
+const schema = new mongoose.Schema({ title: String, data: new Date() });
 
 // Create New Model {Collection} that takes {"its Name", and its Data Schema structure}
 const Task = mongoose.model("Task", schema);
 
-// insert
-const firstTask = new Task({ title: "My New input" });
-firstTask
-  .save()
-  .then(() => console.log(`new record inserted!`))
-  .catch((err) => console.log(`This is your Err msg: ${err}`));
+// Set get() method to define a route that listen for "/create" path
+// Add callback function that gets executed when the server receives a the request
+app.get("/create", (req, res) => {
+  // insert Data to Database then confirm it with via console
+  // Catch the Errs if any
+  const firstTask = new Task({ title: "Send from express!" });
+  firstTask
+    .save()
+    .then(() => console.log(`new record inserted!`))
+    .catch((err) => console.log(`This is your Err msg: ${err}`));
+
+  // Send confirmation response to client
+  res.send("Data Added to Database");
+});
