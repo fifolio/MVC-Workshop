@@ -19,6 +19,18 @@ app.listen(port, () => console.log(`Express Server Connected`));
 // Connect the Mongoose
 // Then Console log to Confirm
 // or Catch the Err and Log it
+
+// set EJS library into the Express and name it "View Engine"
+app.set("view engine", "ejs");
+
+/**
+ * @this (app) is an instant for Express
+ * @this (use) a method used to set the Middleware function
+ * @this (express.urlencoded) is the middleware function that will handle the data were passing through the request and make it available in Req.body object (The Obj made by urlencoded itself)
+ * @this (extended) is set as True, in order to parse more complex data structure
+ */
+app.use(express.urlencoded({ extended: true }));
+
 mongoose
   .connect("mongodb://127.0.0.1:27017/Todo", {
     useNewUrlParser: true, // Check Notes.md for infos
