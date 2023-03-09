@@ -1,0 +1,50 @@
+{
+  "source": {
+    "//include?": "An array of paths to include in the documentation.",
+    "include": ["./todo"],
+    "//exclude?": "An array of paths to exclude from the documentation",
+    "exclude": ["./todo/node_modules"]
+  },
+  "//plugins": "An array of JSDoc plugins to use.",
+  "plugins": ["plugins/markdown"],
+  "opts": {
+    "//destination?": "The directory where JSDoc should write the documentation.",
+    "destination": "docs",
+    "//recurse?": "Whether JSDoc should recurse into subdirectories.",
+    "recurse": true,
+    "//encoding?": "The encoding to use when reading and writing files.",
+    "encoding": "utf8",
+    "//verbose?": "Whether JSDoc should log verbose output.",
+    "verbose": true,
+    "//private?": "Whether JSDoc should include symbols marked as @privat.",
+    "private": true,
+    "//readme?": "The file to use as the project's README..",
+    "readme": "jsdoc-home.md",
+    "//template?": "The name of the JSDoc template to use. example: node_modules/minami",
+    "template": "node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "default_theme": "dark",
+      "//base_url": "To set the base url, Make sure to add a forward slash (/) at the end of the URL.",
+      "favicon": "https://images.emojiterra.com/google/android-11/512px/1f468-1f4bb.png",
+      "homepageTitle": "ToDo Project Documentation",
+      "title": "📚 Content",
+      "footer": "<div class='footer-wrapper'><center>Made with ❤️ by <a href='https://github.com/fifolio'>fifolio</a></center</div>",
+      "menu": [
+        {
+          "title": "<img src='https://cdn-icons-png.flaticon.com/512/2111/2111428.png' width='25' style='vertical-align: middle; margin-top: -5px;'/><b>GitHub</b>",
+          "link": "https://github.com/fifolio/",
+          "target": "_blank"
+        },
+        {
+          "title": "<img src='https://cdn-icons-png.flaticon.com/512/3536/3536505.png' width='25' style='vertical-align: middle; margin-top: -5px;' /><b>Linkedin</b>",
+          "link": "https://www.linkedin.com/in/fifolio/",
+          "target": "_blank"
+        }
+      ]
+    },
+    "markdown": {
+      "hardwrap": false,
+      "idInHeadings": true
+    }
+  }
+}
