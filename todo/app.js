@@ -44,9 +44,9 @@ const Task = mongoose.model("Task", schema);
 // Set get() method to define a route that listen for "/create" path
 // Add callback function that gets executed when the server receives a the request
 
-app.get("/create", (req, res) => {
+app.get("/create/:title", (req, res) => {
   // Making new data that takes its (model) and (schema) from {Task} | Then call the .save method to Pass the data | and Catch any errs
-  const firstTask = new Task({ title: "Send from express!" });
+  const firstTask = new Task({ title: req.params.title });
   firstTask
     .save()
     .then(() => console.log(`new record inserted!`))
