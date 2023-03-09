@@ -55,3 +55,30 @@ app.get("/create/:title", (req, res) => {
   // Send confirmation response to client
   res.send("Data Added to Database");
 });
+
+// find/show
+app.get("/", (req, res) => {
+  Task.find({})
+    .exec()
+    .then((tasks) => {
+      tasks.forEach((task) => console.log(task));
+      res.send("Data is in you console");
+    })
+    .catch((err) => console.log(err));
+});
+
+// Delete
+app.get("/delete/:id", (req, res) => {
+  Task.deleteOne({ _id: req.params.id })
+    .exec()
+    .then(res.send("Your Data Just Deleted"))
+    .catch((err) => console.log(err));
+});
+
+// Update
+app.get("/update/:id/:title", (req, res) => {
+  Task.updateOne({ _id: req.params.id }, { title: req.params.title })
+    .exec()
+    .then(res.send("You Data got Updated"))
+    .catch((err) => console.log(err));
+});
