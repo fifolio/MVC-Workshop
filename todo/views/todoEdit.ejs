@@ -62,10 +62,27 @@
         <div class="container list-group">
           <div class="row">
             <% todotasks.forEach(tasks => { %> <% if(tasks._id == idTask ) { %>
-            <form action="/update/<%=tasks._id%>?_method=PUT" method="POST">
-              <input type="text" value="<%= tasks.title %>" name="title" />
+            <!-- Update Form -->
+            <form
+              style="margin: 10px 0"
+              action="/update/<%=tasks._id%>?_method=PUT"
+              method="POST"
+            >
+              <input
+                style="margin-right: -2px; width: 64%"
+                type="text"
+                name="title"
+                value="<%= tasks.title%>"
+                class="form-control"
+              />
+              <!-- Update Now Btn -->
+              <button type="submit" class="btn btn-info text-light">
+                Update
+              </button>
+              <!-- Cancel the Update -->
+              <a href="/" class="btn btn-warning"> Cancel </a>
             </form>
-
+            <!-- End of Update Form -->
             <% } else { %>
 
             <div class="col-2 my-1">

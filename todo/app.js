@@ -100,3 +100,12 @@ app.get("/update/:id", (req, res) => {
       console.log(`Error from Update: ${err}`);
     });
 });
+
+app.put("/update/:id", (req, res) => {
+  const id = req.params.id;
+  Task.findByIdAndUpdate(id, { title: req.body.title })
+    .then(res.redirect("/"))
+    .catch((err) => {
+      console.log(`You have an Error from put: ${err}`);
+    });
+});
