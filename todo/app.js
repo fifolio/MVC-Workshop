@@ -14,6 +14,10 @@ const mongoose = require("mongoose");
  */
 const app = express();
 const port = 8000;
+
+const methodOverride = require("method-override");
+app.use(methodOverride("_method", { methods: ["POST", "GET"] }));
+
 // Let the App Listen at Port 8000
 app.listen(port, () => console.log(`Express Server Connected`));
 // Connect the Mongoose
@@ -85,9 +89,14 @@ app.get("/delete/:id", (req, res) => {
 });
 
 // Update
-app.get("/update/:id/:title", (req, res) => {
-  Task.updateOne({ _id: req.params.id }, { title: req.params.title })
+app.get("/update/:id", (req, res) => {
+  const id = req.params.id;
+  Task.find({})
     .exec()
-    .then(res.send("You Data got Updated"))
-    .catch((err) => console.log(err));
+    .then((tasks) => {
+      res.render("todoEdit.ejs", { todotasks: tasks, idTask: id });
+    })
+    .catch((err) => {
+      console.log(`Error from Update: ${err}`);
+    });
 });

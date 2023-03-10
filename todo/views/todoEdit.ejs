@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
 
-    <title>Todo App</title>
+    <title>Edit Task</title>
 
     <style>
       .main {
@@ -61,7 +61,13 @@
 
         <div class="container list-group">
           <div class="row">
-            <% todotasks.forEach(tasks => { %>
+            <% todotasks.forEach(tasks => { %> <% if(tasks._id == idTask ) { %>
+            <form action="/update/<%=tasks._id%>?_method=PUT" method="POST">
+              <input type="text" value="<%= tasks.title %>" name="title" />
+            </form>
+
+            <% } else { %>
+
             <div class="col-2 my-1">
               <a
                 class="editBtn list-group-item list-group-item-action list-group-item-info"
@@ -77,13 +83,13 @@
               </a>
             </div>
             <div class="col-2 my-1">
-              <a
+              <!-- <a
                 class="editBtn list-group-item list-group-item-action list-group-item-danger"
                 href="/update/<%=tasks._id%>"
                 >🗑️</a
-              >
+              > -->
             </div>
-            <% }) %>
+            <% } %> <% }) %>
           </div>
         </div>
         <% }else { %>
