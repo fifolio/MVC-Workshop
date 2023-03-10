@@ -53,19 +53,17 @@ const schema = new mongoose.Schema({ title: String });
  */
 const Task = mongoose.model("Task", schema);
 
-// Set get() method to define a route that listen for "/create" path
+// Set post() method to define a route that listen for "/create" path
 // Add callback function that gets executed when the server receives a the request
 
-app.get("/create/:title", (req, res) => {
+app.post("/create", (req, res) => {
   // Making new data that takes its (model) and (schema) from {Task} | Then call the .save method to Pass the data | and Catch any errs
-  const firstTask = new Task({ title: req.params.title });
+  const firstTask = new Task({ title: req.body.title });
   firstTask
     .save()
     .then(() => console.log(`new record inserted!`))
+    .then(() => res.redirect("/"))
     .catch((err) => console.log(`This is your Err msg: ${err}`));
-
-  // Send confirmation response to client
-  res.send("Data Added to Database");
 });
 
 // find/show
@@ -73,8 +71,7 @@ app.get("/", (req, res) => {
   Task.find({})
     .exec()
     .then((tasks) => {
-      tasks.forEach((task) => console.log(task));
-      res.send("Data is in you console");
+      res.render("todo.ejs");
     })
     .catch((err) => console.log(err));
 });
