@@ -4,10 +4,10 @@
  */
 const express = require("express");
 /**
- * @summary Import Mongoose
+ * @summary Import Mongoose from Models
  * @this {mongoose} used to import the Mongoose library.
  */
-const mongoose = require("mongoose");
+const Task = require("./models/tasks");
 /**
  * @summary Pass Express() to App, and set the Server Port to 8000
  * @this {app} is an instant for Express framework.
@@ -16,6 +16,7 @@ const app = express();
 const port = 8000;
 
 const methodOverride = require("method-override");
+const { default: mongoose } = require("mongoose");
 app.use(methodOverride("_method", { methods: ["POST", "GET"] }));
 
 // Let the App Listen at Port 8000
@@ -44,18 +45,6 @@ mongoose
   .catch((err) =>
     console.log(`This is Err msg because of db connection: ${err}`)
   );
-
-/**
- * @summary Create New Mongoose Schema {Record structure contains the default key and value type}
- * @this {schema} is used to Create New Mongoose Schema
- */
-const schema = new mongoose.Schema({ title: String });
-
-/**
- * @summary Create New Model {Collection} that takes {"its Name", and its Data Schema structure}
- * @this {Task} is used to Create New Model
- */
-const Task = mongoose.model("Task", schema);
 
 // Set post() method to define a route that listen for "/create" path
 // Add callback function that gets executed when the server receives a the request
