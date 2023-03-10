@@ -81,11 +81,10 @@ app.get("/", (req, res) => {
 });
 
 // Delete
-app.get("/delete/:id", (req, res) => {
+app.delete("/delete/:id", (req, res) => {
   Task.deleteOne({ _id: req.params.id })
-    .exec()
-    .then(res.send("Your Data Just Deleted"))
-    .catch((err) => console.log(err));
+    .then(res.redirect("/"))
+    .catch((err) => console.log(`You have Error from Delete method ${err}`));
 });
 
 // Update
