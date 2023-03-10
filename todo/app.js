@@ -1,29 +1,13 @@
-/**
- * @summary Import Express
- * @this {express} used to import the Express framework.
- */
 const express = require("express");
-/**
- * @summary Import Mongoose from Models
- * @this {mongoose} used to import the Mongoose library.
- */
+const { default: mongoose } = require("mongoose");
+const methodOverride = require("method-override");
 const Task = require("./models/tasks");
-/**
- * @summary Pass Express() to App, and set the Server Port to 8000
- * @this {app} is an instant for Express framework.
- */
+const router = require("./routes/tasks");
 const app = express();
 const port = 8000;
-
-const methodOverride = require("method-override");
-const { default: mongoose } = require("mongoose");
-app.use(methodOverride("_method", { methods: ["POST", "GET"] }));
-
-// Let the App Listen at Port 8000
 app.listen(port, () => console.log(`Express Server Connected`));
-// Connect the Mongoose
-// Then Console log to Confirm
-// or Catch the Err and Log it
+
+app.use(methodOverride("_method", { methods: ["POST", "GET"] }));
 
 // set EJS library into the Express and name it "View Engine"
 app.set("view engine", "ejs");
@@ -36,6 +20,8 @@ app.set("view engine", "ejs");
  */
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/", router);
+
 mongoose
   .connect("mongodb://127.0.0.1:27017/Todo", {
     useNewUrlParser: true, // Check Notes.md for infos
@@ -45,18 +31,3 @@ mongoose
   .catch((err) =>
     console.log(`This is Err msg because of db connection: ${err}`)
   );
-
-// Create
-// app.post("/create");
-
-// find/show
-// app.get("/");
-
-// Delete
-// app.delete("/delete/:id");
-
-// Edit
-// app.get("/update/:id");
-
-// Update
-// app.put("/update/:id");
