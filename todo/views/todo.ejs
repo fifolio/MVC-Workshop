@@ -25,6 +25,16 @@
       .main h1 {
         padding: 5px 0;
       }
+      .main form {
+        margin: 30px 0;
+      }
+      .main form input {
+        float: left;
+        width: 70%;
+      }
+      .main form button {
+        width: 25%;
+      }
     </style>
   </head>
 
@@ -45,6 +55,20 @@
 
           <button type="submit" class="btn btn-success">Add Task ✔️</button>
         </form>
+        <hr />
+        <!-- Show Tasks -->
+        <% if(todotasks.length > 0){ %>
+
+        <div class="list-group">
+          <% todotasks.forEach(tasks => { %>
+          <a href="#" class="list-group-item list-group-item-action"
+            ><%= tasks.title%></a
+          >
+          <% }) %>
+        </div>
+        <% }else { %>
+        <h4>You have no tasks</h4>
+        <% } %>
       </div>
     </center>
     <script

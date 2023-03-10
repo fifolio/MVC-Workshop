@@ -71,7 +71,7 @@ app.get("/", (req, res) => {
   Task.find({})
     .exec()
     .then((tasks) => {
-      res.render("todo.ejs");
+      res.render("todo.ejs", { todotasks: tasks });
     })
     .catch((err) => console.log(err));
 });
